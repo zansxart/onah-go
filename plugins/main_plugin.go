@@ -105,33 +105,31 @@ func init() {
 
 `, ctx.PushName, ctx.User.Limit, ctx.User.Money, statusReg, statusPrem, totalUsers, registeredUsers, config.ActiveConfig.OwnerNumber)
 
-			var menuText strings.Builder
-			menuText.WriteString(header)
-
-			// Formatting readmore spacer (equivalent to more.repeat(4001) in JS)
-			readMore := string(rune(8206)) + strings.Repeat(string(rune(8206)), 4000)
-			menuText.WriteString(readMore)
-			menuText.WriteString("📖 *DAFTAR MENU ONAN-GO*\n\n")
-
+			var sections []ListSection
 			for tag, cmds := range tagMap {
-				menuText.WriteString(fmt.Sprintf("┏━━━〔 *MENU %s* 〕━⬣\n", strings.ToUpper(tag)))
+				var rows []ListRow
 				for _, cmd := range cmds {
-					flag := "🅕"
+					flag := "Free"
 					if cmd.Limit {
-						flag = "🅛"
+						flag = "Limit"
 					} else if cmd.Premium {
-						flag = "🅟"
+						flag = "Premium"
 					} else if cmd.OwnerOnly {
-						flag = "🅞"
+						flag = "Owner Only"
 					}
-					menuText.WriteString(fmt.Sprintf("┃ ◕ .%s [%s]\n", cmd.Name, flag))
+					rows = append(rows, ListRow{
+						Title:       fmt.Sprintf(".%s", cmd.Name),
+						Description: fmt.Sprintf("%s (%s)", cmd.Help, flag),
+						ID:          fmt.Sprintf(".%s", cmd.Name),
+					})
 				}
-				menuText.WriteString("┗⬣\n\n")
+				sections = append(sections, ListSection{
+					Title: fmt.Sprintf("Menu %s", strings.ToUpper(tag)),
+					Rows:  rows,
+				})
 			}
 
-			menuText.WriteString("ℹ️ _Keterangan:_\n_🅕 = Free, 🅛 = Limit, 🅟 = Premium, 🅞 = Owner Only_")
-
-			return ctx.Reply(menuText.String())
+			return ctx.SendList(header, "ONAH-GO (c) zansxart", "Buka Daftar Menu 📖", sections)
 		},
 	})
 }
