@@ -1,0 +1,22 @@
+{
+  "owner_number": "6285802569316",
+  "owner_name": "Izan",
+  "bot_name": "ONAH-GO",
+  "prefixes": [".", "!", "/"],
+  "database_path": "storage/database.db",
+  "limit_default": 20,
+  "pairing_code_enabled": true,
+  "pairing_number": "6285165613515",
+  "api_keys": {
+    "openrouter": "-",
+    "gemini": "-",
+    "hf": "-",
+    "groq": "-",
+    "tenor": "-"
+  },
+  "messages": {
+    "wait": "Onah sedang memproses...",
+    "error": "Oops, terjadi kesalahan!",
+    "owner_only": "Fitur ini khusus untuk Owner bot!"
+  }
+}

@@ -1,0 +1,18 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+onah-bot
+
+# Database & Sessions (Crucial to prevent leaks)
+storage/
+*.db
+*.db-journal
+*.sqlite
+
+# Logs & Temporary files
+*.log
+tmp/
+.system_generated/
